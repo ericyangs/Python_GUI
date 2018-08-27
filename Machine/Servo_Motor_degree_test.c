@@ -25,7 +25,8 @@ int main(void)
     /*
             ※ Notice
             
-            you should set the extern Voltage 7.6V for running Servo Motor
+            you should set the extern Voltage up to 7.6V for running Servo Motor
+			(The voltage level depends on the weight)
     */
     
     
