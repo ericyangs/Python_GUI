@@ -31,7 +31,7 @@ ISR(USART1_RX_vect)
         i = 0;
         recive_complete = 1;
     }
-    PORTB = 0xFF;   //  LED Test ON
+
 }
 
 int main(void)
@@ -45,7 +45,6 @@ int main(void)
     
     while (1) 
     {
-        PORTB = 0x00;   //  LED Test ON
         if(recive_complete == 1)
         {
             // get value (to see the data by Serial Monitor)
@@ -54,6 +53,25 @@ int main(void)
             USART0_puts("\n\r");
             
             recive_complete = 0;
+        }
+        
+        
+        // LED ON Test after getting value
+        if(buffer[0] == '1')
+        {
+            PORTB = 0x01;
+        }
+        else if(buffer[0] == '2')
+        {
+            PORTB = 0x02;
+        }
+        else if(buffer[0] == '3')
+        {
+            PORTB = 0x04;
+        }
+        else if(buffer[0] == '4')
+        {
+            PORTB = 0x08;
         }
     }
 }
