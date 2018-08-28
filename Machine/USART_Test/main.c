@@ -23,14 +23,15 @@ volatile char recive_complete = 0;
 
 ISR(USART1_RX_vect)
 {
-    buffer[i++] = UDR1;
+    buffer[i] = UDR1;
     
-    if(buffer[i-1] == '\n' || buffer[i-1] == '\r')
+    if(buffer[i++] == '\n' || buffer[i-1] == '\r')
     {
         buffer[i-1] = '\0';
         i = 0;
         recive_complete = 1;
     }
+    PORTB = 0xFF;   //  LED Test ON
 }
 
 int main(void)
@@ -39,17 +40,16 @@ int main(void)
     PORTB = 0x00;       //  LED off  
     
     USART0_init(9600);    //  initializing UART 0 for checking value at Monitor
-    USART1_init(115200);  //  initializing UART 1 for BlueTooth
+    USART1_init(9600);    //  initializing UART 1 for BlueTooth
     sei();                //  Interrupt Enable
     
     while (1) 
     {
+        PORTB = 0x00;   //  LED Test ON
         if(recive_complete == 1)
         {
-            PORTB = 0xFF;   //  LED Test ON
-            
-            // get value
-            sprintf(getValue,"[0]: %c, [1]: %c, [2]: %c",buffer[0],buffer[1],buffer[2]);
+            // get value (to see the data by Serial Monitor)
+            sprintf(getValue,"[0]: %c, [1]: %c, [2]: %c, [3]: %c, [4]: %c",buffer[0],buffer[1],buffer[2],buffer[3],buffer[4]);
             USART0_puts(getValue);
             USART0_puts("\n\r");
             
