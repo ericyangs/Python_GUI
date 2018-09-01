@@ -50,7 +50,7 @@ void rightwheel()
     }  
 }
 
-void leftwhieel()
+void leftwheel()
 {
     PORTB = 0x00;           //  Turn off LED test
     
@@ -79,6 +79,6 @@ int main(void)
     while (1) 
     {
         rightwheel();
-        leftwhieel();
+        leftwheel();
     }
 }
