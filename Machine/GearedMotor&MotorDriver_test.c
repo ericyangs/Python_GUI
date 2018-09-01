@@ -71,7 +71,7 @@ int main(void)
     TCCR3A = 0xA2;          //   Set output Clear of 'A' & 'B' of Timer/Counter 3, set Fast PWM
     TCCR3B = 0x1A;          //   Set Prescaler 8
 
-    OCR3A = 999;            //  initial "0 degree" of Motor     0 ~ 180 degree (range 999 ~ 4999)
+    OCR3A = 999;            // inital value, (any value)
     OCR3B = 999;
     ICR3 = 39999;           // (1/16)us * 8 * (1+39999) = 20000us = 20ms
     
