@@ -19,16 +19,6 @@
  *  
  *  frequency : 1kHz  (1ms period)
  *
- *  right wheel front direction
- *  -> 
- *
- *  left wheel front direction
- *  ->
- *  
- *  right wheel backward direction
- *  ->
- *  
- *  left wheel front direction
  *  ->
  */
 
@@ -72,20 +62,22 @@ int main(void)
 {
     DDRB |= 0x03;    // LED Test 
     
-    DDRB |= (1 << PB5) + (1 << PB6);      //   set PWM port at 'PB5' 'PB6' (OC1A , OC1B)
-    TCCR1A = 0xA2;                        //   Set output Clear of 'A' & 'B' of Timer/Counter 1, set Fast PWM
-    TCCR1B = 0x1B;                        //   Set Prescaler 64
+    DDRB |= (1 << PB5) + (1 << PB6) + (1 << PB7);	//   set PWM port at 'PB5' 'PB6' 'PB7' (OC1A , OC1B , OC1C)
+    TCCR1A = 0xAA;									//   Set output Clear of 'A','B','C' of Timer/Counter 1, set Fast PWM
+    TCCR1B = 0x1B;									//   Set Prescaler 64
     
-    DDRE |= (1 << PE3) + (1 << PE4);      //   set PWM port at 'PE3' 'PE4' (OC3A , OC3B)
-    TCCR3A = 0xA2;                        //   Set output Clear of 'A' & 'B' of Timer/Counter 3, set Fast PWM
-    TCCR3B = 0x1B;                        //   Set Prescaler 64
+    DDRE |= (1 << PE3) + (1 << PE4) + (1 << PE5);   //   set PWM port at 'PE3' 'PE4' 'PE5' (OC3A , OC3B, OC3C)
+    TCCR3A = 0xAA;									//   Set output Clear of 'A','B','C' of Timer/Counter 3, set Fast PWM
+    TCCR3B = 0x1B;									//   Set Prescaler 64
 
     OCR1A = 0;              //  initial value (any value)
     OCR1B = 0;
+	OCR1C = 0;
     ICR1 = 249;
 
     OCR3A = 0;            
-    OCR3B = 0;    
+    OCR3B = 0;
+	OCR3C = 0;    
     ICR3 = 249;             // (1/16)us * 64 * (1+249) = 1000us = 1ms
     
     
