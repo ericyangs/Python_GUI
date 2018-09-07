@@ -25,7 +25,8 @@ int main(void)
     /*
             ※ Notice
             
-            you should set the extern Voltage 7.6V for running Servo Motor
+            you should set the extern Voltage 14V for running Servo Motor.
+			It's current flowed up to 2A, so you need large scale battery as well.
     */
     
     
