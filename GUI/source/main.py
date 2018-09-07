@@ -1,6 +1,9 @@
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
+import serial
+# Setting for serial
+AVR_Serial = serial.Serial(port = 'COM3', baudrate = 9600, parity = serial.PARITY_NONE, stopbits = serial.STOPBITS_ONE, bytesize = serial.EIGHTBITS, timeout = 0)
 
 # call ui file for making object
 # "form_class" is the class which loads the ".ui" file in given directory
