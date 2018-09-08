@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>394</width>
+    <width>292</width>
     <height>398</height>
    </rect>
   </property>
@@ -26,47 +26,8 @@
       <height>111</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_Hit">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>140</y>
-      <width>81</width>
-      <height>231</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Hit the ball</string>
-    </property>
-   </widget>
-   <widget class="QLCDNumber" name="lcdNumber">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>20</y>
-      <width>131</width>
-      <height>91</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>90</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Monaco</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>SWINGS</string>
+    <property name="styleSheet">
+     <string notr="true">border:none;</string>
     </property>
    </widget>
    <widget class="QToolButton" name="toolButton_WW">
@@ -78,12 +39,15 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;</string>
+    </property>
     <property name="text">
      <string>WW</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>pics/WW.png</normaloff>pics/WW.png</iconset>
+      <normaloff>WW.png</normaloff>WW.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -101,12 +65,15 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;</string>
+    </property>
     <property name="text">
      <string>NN</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>pics/NN.png</normaloff>pics/NN.png</iconset>
+      <normaloff>NN.png</normaloff>NN.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -124,12 +91,15 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;</string>
+    </property>
     <property name="text">
      <string>EE</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>pics/EE.png</normaloff>pics/EE.png</iconset>
+      <normaloff>EE.png</normaloff>EE.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -147,12 +117,15 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;</string>
+    </property>
     <property name="text">
      <string>SS</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>pics/SS.png</normaloff>pics/SS.png</iconset>
+      <normaloff>SS.png</normaloff>SS.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -170,12 +143,15 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;</string>
+    </property>
     <property name="text">
      <string>NW</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>pics/NW.png</normaloff>pics/NW.png</iconset>
+      <normaloff>NW.png</normaloff>NW.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -196,12 +172,15 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;</string>
+    </property>
     <property name="text">
      <string>NE</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>pics/NE.png</normaloff>pics/NE.png</iconset>
+      <normaloff>NE.png</normaloff>NE.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -219,12 +198,15 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;</string>
+    </property>
     <property name="text">
      <string>SW</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>pics/SW.png</normaloff>pics/SW.png</iconset>
+      <normaloff>SW.png</normaloff>SW.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -242,17 +224,46 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;</string>
+    </property>
     <property name="text">
      <string>SE</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>pics/SE.png</normaloff>pics/SE.png</iconset>
+      <normaloff>SE.png</normaloff>SE.png</iconset>
     </property>
     <property name="iconSize">
      <size>
       <width>60</width>
       <height>60</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton_hit">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>40</y>
+      <width>91</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;</string>
+    </property>
+    <property name="text">
+     <string>hit</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>racket.jpg</normaloff>racket.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>100</width>
+      <height>300</height>
      </size>
     </property>
    </widget>
