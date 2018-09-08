@@ -24,7 +24,7 @@ import serial
 # __________________________________________
 
 # Setting for serial
-TX_Code = serial.Serial(port = 'COM3', baudrate = 9600, parity = serial.PARITY_NONE, stopbits = serial.STOPBITS_ONE, bytesize = serial.EIGHTBITS, timeout = 0)
+TX_Serial = serial.Serial(port ='COM3', baudrate = 9600, parity = serial.PARITY_NONE, stopbits = serial.STOPBITS_ONE, bytesize = serial.EIGHTBITS, timeout = 0)
 ###############################################################################
 
 # call ui file for making object
@@ -52,39 +52,39 @@ class MyWindow(QMainWindow, form_class):
     def hit_btn_clicked(self):
         #QMessageBox.about(self, "message", "clicked")
         print ("hit button pressed") # for debug
-        TX_Code.write(bytes("k\n", encoding = 'ascii'))
+        TX_Serial.write(bytes("k\n", encoding ='ascii'))
 
     def EE_btn_clicked(self):
         print ("EE") # for debug
-        TX_Code.write(bytes("d\n", encoding='ascii'))
+        TX_Serial.write(bytes("d\n", encoding='ascii'))
 
     def NE_btn_clicked(self):
         print ("NE") # for debug
-        TX_Code.write(bytes("i\n", encoding='ascii'))
+        TX_Serial.write(bytes("i\n", encoding='ascii'))
 
     def NN_btn_clicked(self):
         print ("NN") # for debug
-        TX_Code.write(bytes("a\n", encoding='ascii'))
+        TX_Serial.write(bytes("a\n", encoding='ascii'))
 
     def NW_btn_clicked(self):
         print ("NW") # for debug
-        TX_Code.write(bytes("g\n", encoding='ascii'))
+        TX_Serial.write(bytes("g\n", encoding='ascii'))
 
     def SE_btn_clicked(self):
         print ("SE") # for debug
-        TX_Code.write(bytes("j\n", encoding='ascii'))
+        TX_Serial.write(bytes("j\n", encoding='ascii'))
 
     def SS_btn_clicked(self):
         print ("SS") # for debug
-        TX_Code.write(bytes("b\n", encoding='ascii'))
+        TX_Serial.write(bytes("b\n", encoding='ascii'))
 
     def SW_btn_clicked(self):
         print ("SW") # for debug
-        TX_Code.write(bytes("h\n", encoding='ascii'))
+        TX_Serial.write(bytes("h\n", encoding='ascii'))
 
     def WW_btn_clicked(self):
         print ("WW") # for debug
-        TX_Code.write(bytes("c\n", encoding='ascii'))
+        TX_Serial.write(bytes("c\n", encoding='ascii'))
 ###############################################################################
 
 ###############################################################################
