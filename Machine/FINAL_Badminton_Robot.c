@@ -78,23 +78,25 @@ ISR(TIMER0_COMP_vect)
 	}
 	else
 	{
-		cnt = 0;
 		PORTB |= (1 << PB2);
 	}
 
 	//	2.5/20[ms] = 180 degree of the hitting machine
 	if(hit_flag == 1)
 	{
-		if(cnt != 35 && hit_flag == 0)
+		if(cnt <= 35)
 		{
 			PORTB &= ~(1 << PB2);
 		}
 		else
 		{
-			cnt = 0;
 			PORTB |= (1 << PB2);
 		}
 	}
+	
+	// 0.5 * 40 = 20ms
+	if(cnt == 40)
+		cnt = 0;
     
 }
 
