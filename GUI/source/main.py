@@ -1,5 +1,6 @@
 import sys
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 from PyQt5 import uic
 import serial
 
@@ -17,14 +18,15 @@ import serial
 #  |     | toolButton_NN  --- QToolButton -- 'a'
 #  |     | toolButton_NW  --- QToolButton -- 'g'
 #  |     | toolButton_SE  --- QToolButton -- 'j'
-#  |     | toolButton_SS  --- QToolButton -- 'b'-
+#  |     | toolButton_SS  --- QToolButton -- 'b'
 #  |     | toolButton_SW  --- QToolButton -- 'h'
 #  |     | toolButton_WW  --- QToolButton -- 'c'
 #  | statusbar --- QStatusBar
 # __________________________________________
 
 # Setting for serial
-TX_Serial = serial.Serial(port ='COM9', baudrate = 9600, parity = serial.PARITY_NONE, stopbits = serial.STOPBITS_ONE, bytesize = serial.EIGHTBITS, timeout = 0)
+
+TX_Serial = serial.Serial(port ='COM19', baudrate = 9600, parity = serial.PARITY_NONE, stopbits = serial.STOPBITS_ONE, bytesize = serial.EIGHTBITS, timeout = 0)
 ###############################################################################
 
 # call ui file for making object
