@@ -87,6 +87,7 @@ class MyWindow(QMainWindow, form_class):
     def WW_btn_clicked(self):
         print ("WW") # for debug
         TX_Serial.write(bytes("c\n", encoding='ascii'))
+
 ###############################################################################
 
 ###############################################################################
