@@ -1,5 +1,12 @@
-# Python_GUI
-python GUI practice
+# Python_GUI & Atmega 128 pilot project
+
+Korea Polytechnic convergence centre, under guidance of Porf. Yeonsik, Woo, 2018. Sep.
+
+Collaboration: Wonjae Lee, Yubin Park, Seungan Woo, Hojung Kim, Jaewoon Choi
+
+Badminton robot and its simple cotrol with GUI interface, utilizing AVR-GCC programming and PyQt5 framework on Python Anaconda3 distro.
+
+
 
 
 # Mechanical design : core
