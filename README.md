@@ -9,3 +9,6 @@ python GUI practice
 
 # Operation of Wheel Map
 ![wheel_machinsm_pics](https://user-images.githubusercontent.com/19379126/45285171-7cf65e80-b51d-11e8-9e58-0c2788062402.png)
+
+# Power configuration
+![ka7805_regulator](https://user-images.githubusercontent.com/19379126/45285259-b75ffb80-b51d-11e8-9e2a-77ace1eec1ab.JPG)
