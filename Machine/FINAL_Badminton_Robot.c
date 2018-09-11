@@ -12,8 +12,11 @@
 	추가해야할 사항
 	(디버깅 테스트 필요)
 	
-	1. hit_flag 아스키코드를 받고 작동하도록
-	
+	1. hit_flag 각도 튜닝 필요.
+    2. Wheels 속도 튜닝 필요.
+    3. Master/Slave 통신으로 PWM제어 실험 필요.
+	4. 부품조립 필요 (드릴, 볼트, 너트 필요)
+    5. 주의사항, 바퀴 모터드라이버, 서보모터에 12V인가. 두꺼운 wire 사용할것.
 
 */
 
@@ -29,7 +32,7 @@ char buf[10];
 volatile int i = 0;
 volatile char recive_complete = 0;
 unsigned int cnt = 0;
-int hit_flag = 0;
+volatile int hit_flag = 0;
 
 // define receive code from 'a' ~ 'k'
 enum
@@ -71,31 +74,34 @@ ISR(TIMER0_COMP_vect)
 {
 	cnt++;
 	
-	// 0.5/20[ms] = 0 degree of the hitting machine
-	if(cnt != 39 && hit_flag == 0)
-	{
-		PORTB &= ~(1 << PB2);
-	}
-	else
-	{
-		PORTB |= (1 << PB2);
-	}
-
-	//	2.5/20[ms] = 180 degree of the hitting machine
+	// 0 degree of the hitting machine
+	
+    if(hit_flag == 0)
+    {
+        if(cnt >= 7)    //  <<== Need Tuning value ***
+        {
+            PORTB &= ~(1 << PB3);
+        }
+        else
+        {
+            PORTB |= (1 << PB3);
+        }
+    }
+    
+	//	180 degree of the hitting machine
 	if(hit_flag == 1)
 	{
-		if(cnt <= 35)
+		if(cnt >= 26)   // <<== Need Tuning value ***
 		{
-			PORTB &= ~(1 << PB2);
+			PORTB &= ~(1 << PB3);
 		}
 		else
 		{
-			PORTB |= (1 << PB2);
+			PORTB |= (1 << PB3);
 		}
 	}
-	
-	// 0.5 * 40 = 20ms
-	if(cnt == 40)
+	// 0.1 * 200 = 20ms
+	if(cnt == 200)
 		cnt = 0;
     
 }
@@ -106,18 +112,18 @@ int main(void)
 	DDRC = 0xFF;
     
 	// For frequency of Hitting machine using Timer/counter 0 Interrupt
-	DDRB |= (1 << PB2);
-	PORTB |= (1 << PB2);	//	default 'HIGH'
+	DDRB |= (1 << PB3);
+	//PORTB |= (1 << PB3);	//	default 'HIGH'
 					
     //Timer/counter0 interrupt for Servo motor
-    // CTC mode, 64 prescaler, to make 0.5ms
-    // (1/16)us * 64 * (1 + 124) = 500us = 0.5ms
-    TCCR0 = 0x2C;
-    OCR0 = 124;
+    // CTC mode, 8 prescaler, to make 0.1ms
+    // (1/16)us * 8 * (1 + 199) = 100us = 0.1ms
+    TCCR0 = 0x0A;
+    OCR0 = 199;
     TIMSK = 0x02;   //  Timer/Counter0 Comparative match interrupt enable
     
     
-    DDRB |= (1 << PB6) + (1 << PB7);	//   set PWM port at 'PB6' 'PB7' (OC1B , OC1C)
+    DDRB |= (1 << PB6) | (1 << PB7);	//   set PWM port at 'PB6' 'PB7' (OC1B , OC1C)
     TCCR1A = 0x2A;						//   Set output Clear of 'B','C' of Timer/Counter 1, set Fast PWM
     TCCR1B = 0x1A;						//   Set Prescaler 64
     
@@ -144,7 +150,7 @@ int main(void)
         {
             ControlMotor();
             recive_complete = 0;
-        }
+        }       
     }
 }
 
