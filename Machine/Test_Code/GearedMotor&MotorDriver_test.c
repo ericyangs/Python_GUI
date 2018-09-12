@@ -8,7 +8,9 @@
  *
  */ 
 #define F_CPU 16000000UL
-
+#define TRUE 1
+#define FALSE 0
+ 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
