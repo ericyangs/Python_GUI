@@ -4,11 +4,15 @@
  *
  *  Created: 2018-09-07
  *     Author    : Jay Lee
- *  Collaborator : Yu bin Pack
+ *  Collaborator : Yu bin Park
  *
  */ 
 
 #define F_CPU 16000000UL
+#define TRUE 1
+#define FALSE 0
+#define BAUD_HIGH 115200
+#define BAUD_LOW 9600
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -17,12 +21,12 @@
 
 char buf[30];
 volatile int i = 0;
-volatile char recive_complete = 0;
+volatile char recive_complete = FALSE;
 
 void ControlMotor(void);
 
 // Receive the values by interrupt from slave bluetooth
-// 슬레이브 블루투스로 값을 받음.
+// receive the value slave bluetooth
 ISR(USART1_RX_vect)
 {
     buf[i] = UDR1;
@@ -31,31 +35,31 @@ ISR(USART1_RX_vect)
     {
         buf[i-1] = '\0';
         i = 0;
-        recive_complete = 1;
+        recive_complete = TRUE;
     }
 
 }
 
-// define receive code from 'a' ~ 'k'
+// define receive code from 'a' ~ 'k' in a sequencial order
 enum
 {
-    up = 'a',
-    down,
-    left,
-    right,
+    UP = 'a',
+    DOWN, // 'b'
+    LEFT, // 'c'
+    RIGHT, // 'd'
 
     // Clockwise Rotation, Counter Clockwise Rotation
-    // 시계방향회전, 반시계방향회전
-    ClkWise_Rotate,
-    countor_ClkWise_Rotate,
+    // rotate clockwise/counter clockwise
+    CLKWISE_ROTATE, // 'e'
+    COUNTER_CLKWISE_ROTATE, // 'f'
     
-    upLeft,
-    upRight,
-    downLeft,
-    downRight,
+    UP_LEFT, // 'g'
+    UP_RIGHT, // 'h'
+    DOWN_LEFT, // 'i'
+    DOWN_RIGHT, // 'j'
     
-    // 타격
-    hit
+    // Hit a target
+    HIT // 'k'
 };
 
 int main(void)
@@ -85,22 +89,23 @@ int main(void)
     OCR3C = 0;
     ICR3 = 1999;
     
-    USART1_init(9600);
+    USART1_init(BADU_LOW);
     
     sei();
     
-    while (1) 
+    while (TRUE) 
     {
-        if(recive_complete == 1)
+        if(recive_complete == TRUE)
         {
             ControlMotor();
-            recive_complete = 0;
+            recive_complete = FALSE;
         }
     }
 }
 
 void ControlMotor(void)
 {
+    //  check data validation
     if (buf[0] >= 'a' && buf[0] <= 'f') // a~f 사이의 문자가 시리얼로 들어올 경우 -> 모든 모터를 구동해야 제어가 가능하므로 하나로 묶음
     {
         OCR1B = 1999; // 1차 테스트 : 최고 속도로 회전시켜 사용자가 제어가 가능한지 확인해보기
@@ -111,6 +116,28 @@ void ControlMotor(void)
 
         // 아래에는 각 바퀴의 방향 제어만
         
+        switch(buf[0])
+        {
+            case 0x61: //'a'
+                PORTC = 0x55;
+                break;
+            case 0x62: //'b'
+                PORTC = 0xAA;
+                berak;
+            case 0x63: //'c'
+                PORTC = 0x96;
+                break;
+            case 0x64: // 'd'
+                PORTC = 0x69;
+                break;
+            case 0x65: // 'e'
+                PORTC = 0x5A;
+                break;
+            case 0x66: // 'f'
+                PORTC = 0xA5;
+                break;
+        }
+        /*
         if (buf[0] == up)      // ↑
         PORTC = 0x55;           // 모두 앞방향으로 회전
 
@@ -128,8 +155,8 @@ void ControlMotor(void)
 
         else if (buf[0] == countor_ClkWise_Rotate)  // 반시계 방향 회전
         PORTC = 0xa5;                               // 좌측 바퀴는 모두 뒤로, 우측 바퀴는 모두 앞으로 회전
+        */
     }
-
     else if (buf[0] == upLeft)     // ↖
     {
         // 좌+후, 우+전만 앞으로 회전
@@ -137,7 +164,6 @@ void ControlMotor(void)
         OCR3B = 1999;
         PORTC = 0x14;
     }
-
     else if(buf[0] == downLeft)      // ↙
     {
         // 좌+전, 우+후만 뒤로 회전
@@ -145,7 +171,6 @@ void ControlMotor(void)
         OCR3C = 1999;
         PORTC = 0x82;
     }
-
     else if (buf[0] == upRight)     // ↗
     {
         // 좌+전, 우+후만 앞으로 회전
@@ -153,7 +178,6 @@ void ControlMotor(void)
         OCR3C = 1999;
         PORTC = 0x41;
     }
-
     else if (buf[0] == downRight)     // ↘
     {
         // 좌+후, 우+전만 뒤로 회전
@@ -161,6 +185,7 @@ void ControlMotor(void)
         OCR3B = 1999;
         PORTC = 0x28;
     }
+    // exception handling
     else // 정해진 패킷 내의 문자가 들어오지 않거나 입력이 중단되었을 경우
     {
         // 모든 모터의 PWM 값을 0으로 바꿔주고
