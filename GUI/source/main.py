@@ -55,41 +55,31 @@ class MyWindow(QMainWindow, form_class):
         #QMessageBox.about(self, "message", "clicked")
         print ("hit button pressed") # for debug
         TX_Serial.write(bytes("k\n", encoding ='ascii'))
-
     def EE_btn_clicked(self):
         print ("EE") # for debug
         TX_Serial.write(bytes("d\n", encoding='ascii'))
-
     def NE_btn_clicked(self):
         print ("NE") # for debug
         TX_Serial.write(bytes("i\n", encoding='ascii'))
-
     def NN_btn_clicked(self):
         print ("NN") # for debug
         TX_Serial.write(bytes("a\n", encoding='ascii'))
-
     def NW_btn_clicked(self):
         print ("NW") # for debug
         TX_Serial.write(bytes("g\n", encoding='ascii'))
-
     def SE_btn_clicked(self):
         print ("SE") # for debug
         TX_Serial.write(bytes("j\n", encoding='ascii'))
-
     def SS_btn_clicked(self):
         print ("SS") # for debug
         TX_Serial.write(bytes("b\n", encoding='ascii'))
-
     def SW_btn_clicked(self):
         print ("SW") # for debug
         TX_Serial.write(bytes("h\n", encoding='ascii'))
-
     def WW_btn_clicked(self):
         print ("WW") # for debug
         TX_Serial.write(bytes("c\n", encoding='ascii'))
-
 ###############################################################################
-
 ###############################################################################
 if __name__ == "__main__":
     app = QApplication(sys.argv)
