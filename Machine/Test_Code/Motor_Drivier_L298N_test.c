@@ -6,15 +6,19 @@
  */
 
 
-#define F_CPU 16000000UL
+#define F_CPU                     16000000UL
+#define CLOCKWISE                 PORTA = 0b01010000
+#define WAIT                      PORTA = 0x00;
+#define COUNTERCLOCKWISE          PORTA = 0b10100000
+#define TRUE                      1
+#define FALSE                     0
+
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-#define clockwise        PORTA = 0b01010000
-#define wait             PORTA = 0x00;
-#define Countclockwise   PORTA = 0b10100000
+
 
 
 int main(void)
@@ -48,16 +52,14 @@ int main(void)
     {
 
         
-        clockwise;
+        CLOCKWISE;
         _delay_ms(3000);
-        wait;
+        WAIT;
         _delay_ms(1000);
         
-        Countclockwise;
+        COUNTERCLOCKWISE;
         _delay_ms(3000);
-        wait;
+        WAIT;
         _delay_ms(1000);
-        
-        
     }
 }
