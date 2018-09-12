@@ -32,26 +32,31 @@ char buf[10];
 volatile int i = 0;
 volatile char recive_complete = 0;
 unsigned int cnt = 0;
+unsigned int waitTime = 0;
 volatile int hit_flag = 0;
 
-// define receive code from 'a' ~ 'k'
+
+// define receive code from '1' ~ '9'
 enum
 {
-    up = 'a',
+    up = '1',
     down,
     left,
     right,
-
-    // Clockwise Rotation, Counter Clockwise Rotation
-    ClkWise_Rotate,
-    countor_ClkWise_Rotate,
-    
-    upLeft,
+	
+	upLeft,
+	downLeft,
     upRight,
-    downLeft,
     downRight,
     
     hit
+
+/*
+    // Clockwise Rotation, Counter Clockwise Rotation
+    ClkWise_Rotate,
+    countor_ClkWise_Rotate,
+*/ 
+    
 };
 
 void ControlMotor(void);
@@ -69,11 +74,10 @@ ISR(USART1_RX_vect)
     }
 }
 
-// Interrupt per 0.5ms
+// Interrupt per 0.1ms
 ISR(TIMER0_COMP_vect)
 {
 	cnt++;
-	
 	// 0 degree of the hitting machine
 	
     if(hit_flag == 0)
@@ -91,7 +95,8 @@ ISR(TIMER0_COMP_vect)
 	//	180 degree of the hitting machine
 	if(hit_flag == 1)
 	{
-		if(cnt >= 26)   // <<== Need Tuning value ***
+		waitTime++;
+        if(cnt >= 26)   // <<== Need Tuning value ***
 		{
 			PORTB &= ~(1 << PB3);
 		}
@@ -99,6 +104,12 @@ ISR(TIMER0_COMP_vect)
 		{
 			PORTB |= (1 << PB3);
 		}
+        
+        if(waitTime == 10000)  //  0.1 * 10000 = 1000ms = 1s
+        {
+            waitTime = 0;
+            hit_flag = 0;
+        }            
 	}
 	// 0.1 * 200 = 20ms
 	if(cnt == 200)
@@ -156,7 +167,7 @@ int main(void)
 
 void ControlMotor(void)
 {
-    if (buf[0] >= 'a' && buf[0] <= 'f') // a~f 사이의 문자가 시리얼로 들어올 경우 -> 모든 모터를 구동해야 제어가 가능하므로 하나로 묶음
+    if (buf[0] >= '1' && buf[0] <= '4') // a~f 사이의 문자가 시리얼로 들어올 경우 -> 모든 모터를 구동해야 제어가 가능하므로 하나로 묶음
     {
         OCR1B = 1999; // 1차 테스트 : 최고 속도로 회전시켜 사용자가 제어가 가능한지 확인해보기
         OCR1C = 1999;
@@ -177,13 +188,14 @@ void ControlMotor(void)
 
         else if (buf[0] == right) // →
         PORTC = 0x69;           // 좌+전은 앞으로, 좌+후는 뒤로, 우+전은 뒤로, 우+후는 앞으로 회전
-
+/*
         else if (buf[0] == ClkWise_Rotate)  // 시계 방향 회전
         PORTC = 0x5a;                       // 좌측 바퀴는 모두 앞으로, 우측 바퀴는 모두 뒤로 회전
 
         else if (buf[0] == countor_ClkWise_Rotate)  // 반시계 방향 회전
         PORTC = 0xa5;                               // 좌측 바퀴는 모두 뒤로, 우측 바퀴는 모두 앞으로 회전
-    }
+ */   
+	}
 
     else if (buf[0] == upLeft)     // ↖
     {
@@ -216,7 +228,12 @@ void ControlMotor(void)
         OCR3B = 1999;
         PORTC = 0x28;
     }
-    else // 정해진 패킷 내의 문자가 들어오지 않거나 입력이 중단되었을 경우
+    else if (buf[0] == hit)
+    {
+        hit_flag = 1;
+    }
+    
+ /*   else // 정해진 패킷 내의 문자가 들어오지 않거나 입력이 중단되었을 경우
     {
         // 모든 모터의 PWM 값을 0으로 바꿔주고
         OCR1B = 0; // PB6
@@ -226,4 +243,5 @@ void ControlMotor(void)
 
         PORTC = 0;// 회전 방향을 정지로 바꿔줌
     }
+*/
 }
