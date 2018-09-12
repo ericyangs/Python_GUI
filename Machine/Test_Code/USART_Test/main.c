@@ -2,7 +2,7 @@
  *  Bluetooth Signal Test
  *
  *  Created: 2018-08-27 10:00:42 PM
- *  Author : Jay Lee
+ *  Author : Yubin Park
  *
  *  <atmega128> pin      <Bludtooth>
  *  PD2(RXD 1)      ---->   TXD
@@ -10,6 +10,8 @@
  */ 
 
 #define F_CPU 16000000UL
+#define BAUD_LOW 9600
+#define BAUD_HIGH 115200
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -39,8 +41,8 @@ int main(void)
     DDRB = 0xFF;        //  Set Port B as output for LED test
     PORTB = 0x00;       //  LED off  
     
-    USART0_init(9600);    //  initializing UART 0 for checking value at Monitor
-    USART1_init(9600);    //  initializing UART 1 for BlueTooth
+    USART0_init(BAUD_LOW);    //  initializing UART 0 for checking value at Monitor
+    USART1_init(BAUD_HIGH);    //  initializing UART 1 for BlueTooth
     sei();                //  Interrupt Enable
     
     while (1) 
@@ -57,6 +59,24 @@ int main(void)
         
         
         // LED ON Test after getting value
+		switch (buffer[0]) // to reduce Big-O
+		{
+		case '1':
+			PORTB = 0x01;
+			break;
+		case '2':
+			PORTB = 0x02;
+			break;
+		case '3':
+			PORTB = 0x04;
+			break;
+		case '4':
+			PORTB = 0x08;
+			break;
+		default: //  case of nothing received
+			PORTB = 0xFF; 
+		}
+		/*
         if(buffer[0] == '1')
         {
             PORTB = 0x01;
@@ -73,6 +93,7 @@ int main(void)
         {
             PORTB = 0x08;
         }
+        }*/
     }
 }
 
