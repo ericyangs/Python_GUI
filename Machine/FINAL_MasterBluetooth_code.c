@@ -61,8 +61,11 @@ int main(void)
         if(recive_complete == 1)
         {
             // check the data at PC
+            // Make a Comment or remove this, when you succeed the debugging of forwarding data
+            /////////////////////////////
             USART0_puts(buffer);
             USART0_puts("\r\n");
+            /////////////////////////////
             
             USART1_puts(buffer);
             USART1_puts("\r\n");
