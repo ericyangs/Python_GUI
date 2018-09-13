@@ -25,7 +25,7 @@ Badminton robot and its simple cotrol with GUI interface, utilizing AVR-GCC prog
 # Operation of Wheel Map
 ![wheel_machinsm_pics](https://user-images.githubusercontent.com/19379126/45285171-7cf65e80-b51d-11e8-9e58-0c2788062402.png)
 
-#Geared motor pin alignment
+# Geared motor pin alignment
 ![geard_motor_pin_alignment](https://user-images.githubusercontent.com/19379126/45502957-5e63c200-b7c0-11e8-9f3a-8f71a4d189f1.JPG)
 
 # Power configuration
