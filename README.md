@@ -18,12 +18,15 @@ Badminton robot and its simple cotrol with GUI interface, utilizing AVR-GCC prog
 
 ![racket_machine_design_drawing2](https://user-images.githubusercontent.com/19379126/45285045-15401380-b51d-11e8-8d99-3478cd50f92e.JPG)
 
-#Schematic
+# Schematic
 ![schematic](https://user-images.githubusercontent.com/19379126/45502813-ec8b7880-b7bf-11e8-96a3-9eafb9325e61.png)
 
 
 # Operation of Wheel Map
 ![wheel_machinsm_pics](https://user-images.githubusercontent.com/19379126/45285171-7cf65e80-b51d-11e8-9e58-0c2788062402.png)
+
+#Geared motor pin alignment
+![geard_motor_pin_alignment](https://user-images.githubusercontent.com/19379126/45502957-5e63c200-b7c0-11e8-9f3a-8f71a4d189f1.JPG)
 
 # Power configuration
 ![ka7805_regulator](https://user-images.githubusercontent.com/19379126/45285259-b75ffb80-b51d-11e8-9e2a-77ace1eec1ab.JPG)
