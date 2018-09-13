@@ -27,6 +27,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
+#include "USARR.h"
 
 char buf[10];
 volatile int i = 0;
@@ -152,6 +153,8 @@ int main(void)
     OCR3C = 0;
     ICR3 = 1999;
     
+	USART1_init(9600);
+	
     // Global Interrupt Enable
     sei();
     
