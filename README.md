@@ -33,3 +33,7 @@ Badminton robot and its simple cotrol with GUI interface, utilizing AVR-GCC prog
 
 # GUI Sekleton(ongoing)
 ![controler](https://user-images.githubusercontent.com/19379126/45286880-e7110280-b521-11e8-9a51-4780460b47dd.PNG)
+
+# Completed Hardware
+![swing machine](https://user-images.githubusercontent.com/36121225/46571083-b483e980-c9a9-11e8-8231-9f9d4f19015a.jpg)
+![swing machine 2](https://user-images.githubusercontent.com/36121225/46571084-b51c8000-c9a9-11e8-953c-26b2cc97bba1.jpg)
